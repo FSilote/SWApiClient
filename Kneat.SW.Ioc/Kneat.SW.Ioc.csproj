@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kneat.SW.Application\Kneat.SW.Application.csproj" />
+    <ProjectReference Include="..\Kneat.SW.Domain\Kneat.SW.Domain.csproj" />
+    <ProjectReference Include="..\Kneat.SW.Infrastructure\Kneat.SW.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
