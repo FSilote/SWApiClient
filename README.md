@@ -22,3 +22,12 @@
 * Open solution file (KneatCodeChallenge.sln) in Visual Studio.
 * Make sure ConsoleApp is the "startup project"
 * Run project
+
+### Program Options
+
+####After running program the options below will be shown:
+
+1.  Show all starships => Use this option if you want load and show all information about every available starship.
+2.  Find starship by id => Use this option if you want load and show all information about a specific starship. After choose this option, the starship id will be asked for you.
+3.  Show stops required to resupply (all starships) => Use this option if you want calculate the number of stops required to resupply for all available starships to travel a given distance. After choose this option, the distance will be asked for you.
+4.  Show stops required to resupply (specific starship) = > Use this option if you want calculate the number of stops required to resupply a specific starship to travel a given distance. After choose this option, the starship id and the distance will be asked for you.

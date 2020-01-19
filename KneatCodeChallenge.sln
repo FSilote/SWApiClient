@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.Domain", "Kneat.SW.Domain\Kneat.SW.Domain.csproj", "{8BC67A60-7A39-451C-B3C5-4DBD576D3E1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kneat.SW.Domain", "Kneat.SW.Domain\Kneat.SW.Domain.csproj", "{8BC67A60-7A39-451C-B3C5-4DBD576D3E1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.Application", "Kneat.SW.Application\Kneat.SW.Application.csproj", "{2CA04A37-A2FB-4B49-A566-74CFF68F65CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kneat.SW.Application", "Kneat.SW.Application\Kneat.SW.Application.csproj", "{2CA04A37-A2FB-4B49-A566-74CFF68F65CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.Infrastructure", "Kneat.SW.Infrastructure\Kneat.SW.Infrastructure.csproj", "{453DE481-4366-4A0C-B2D6-1118AA144413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kneat.SW.Infrastructure", "Kneat.SW.Infrastructure\Kneat.SW.Infrastructure.csproj", "{453DE481-4366-4A0C-B2D6-1118AA144413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.Ioc", "Kneat.SW.Ioc\Kneat.SW.Ioc.csproj", "{AF02F9DA-A7E6-4614-B623-D559D430BB64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kneat.SW.Ioc", "Kneat.SW.Ioc\Kneat.SW.Ioc.csproj", "{AF02F9DA-A7E6-4614-B623-D559D430BB64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.Domain.Tests", "Kneat.SW.Domain.Tests\Kneat.SW.Domain.Tests.csproj", "{DC7F336A-74DD-486A-8FC8-A34593EA63DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.Ioc.Tests", "Kneat.SW.Ioc.Tests\Kneat.SW.Ioc.Tests.csproj", "{F3AE336F-ACA3-41AF-9AAE-C4F63D219ACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kneat.SW.ConsoleApp", "Kneat.SW.ConsoleApp\Kneat.SW.ConsoleApp.csproj", "{2472FB84-BD67-42F6-93B9-2408C14AC6DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kneat.SW.ConsoleApp", "Kneat.SW.ConsoleApp\Kneat.SW.ConsoleApp.csproj", "{2472FB84-BD67-42F6-93B9-2408C14AC6DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD57DEE9-D330-4670-84E4-73DE0B12BED5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
