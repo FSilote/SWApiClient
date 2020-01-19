@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Kneat.SW.Domain.Exceptions
+﻿namespace Kneat.SW.Domain.Exceptions
 {
-    public class GatewayUnavailableException : Exception
+    public class GatewayUnavailableException : BaseException
     {
         public GatewayUnavailableException(string message) : base(message) { }
     }

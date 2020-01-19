@@ -1,13 +1,11 @@
 ﻿using Kneat.SW.Domain.Exceptions;
 using Kneat.SW.Domain.Infrastructure.Common;
-using Kneat.SW.Domain.Infrastructure.Common.Model;
 using Kneat.SW.Domain.Infrastructure.Gateways;
 using Kneat.SW.Domain.Infrastructure.Gateways.SWApi;
 using Kneat.SW.Domain.Infrastructure.Gateways.SWApi.Model;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Kneat.SW.Infrastructure.Gateways.SWApi_co
 {
@@ -38,9 +36,10 @@ namespace Kneat.SW.Infrastructure.Gateways.SWApi_co
             var uri = new Uri($"{apiConfig.host}{apiConfig.starshipsUrl}{id}");
             var httpResult = _httpGateway.Get<StarshipApiModel>(uri, null);
 
-            return httpResult.Success
-                ? httpResult.Result
-                : null;
+            if (!httpResult.Success)
+                throw new GatewayUnavailableException($"Cannot connect to the SWApi.co: {httpResult?.Message ?? "No message available."}");
+
+            return httpResult.Result;
         }
 
         public StarshipApiModel FindStarship(string name)

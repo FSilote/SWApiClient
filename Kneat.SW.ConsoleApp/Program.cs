@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Kneat.SW.Application.Command.Starships;
+using Kneat.SW.Domain.Exceptions;
 using Kneat.SW.Ioc;
 using MediatR;
 using System;
@@ -16,48 +17,59 @@ namespace Kneat.SW.ConsoleApp
         {
             var menuChosen = 0;
 
-            Console.OutputEncoding = Encoding.Default;
-            Console.WriteLine("Starting Application...");
-
-            LoadIocContainer();
+            StartApplication();
 
             do
             {
-                Console.Clear();
-
-                Console.Write("..:: Star Wars - Api Client ::..");
-                Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}1 - Show all starships");
-                Console.WriteLine("2 - Find starship by id");
-                Console.WriteLine("3 - Show stops needed to resupply (all starships)");
-                Console.WriteLine("4 - Show stops needed to resupply (specific starship)");
-
-                Console.Write($"{Environment.NewLine}Type your choice: ");
-
-                while (!int.TryParse(Console.ReadLine(), out menuChosen))
+                try
                 {
-                    Console.Write("Invalid input. Try again: ");
-                }
+                    Console.Clear();
 
-                switch (menuChosen)
+                    Console.Write("..:: Star Wars - Api Client ::..");
+                    Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}1 - Show all starships");
+                    Console.WriteLine("2 - Find starship by id");
+                    Console.WriteLine("3 - Show stops needed to resupply (all starships)");
+                    Console.WriteLine("4 - Show stops needed to resupply (specific starship)");
+
+                    Console.Write($"{Environment.NewLine}Type your choice: ");
+
+                    while (!int.TryParse(Console.ReadLine(), out menuChosen))
+                    {
+                        Console.Write("Invalid input. Try again: ");
+                    }
+
+                    switch (menuChosen)
+                    {
+                        case 1:
+                            ShowAllStarships();
+                            break;
+                        case 2:
+                            ShowStarshipById();
+                            break;
+                        case 3:
+                            ShowAllStopsNeededToResupply();
+                            break;
+                        case 4:
+                            ShowStopsNeededToResupplyById();
+                            break;
+                        default:
+                            Console.WriteLine($"{Environment.NewLine}Invalid value chosen.");
+                            break;
+                    }
+                }
+                catch (BaseException baseEx)
                 {
-                    case 1:
-                        ShowAllStarships();
-                    break;
-                    case 2:
-                        ShowStarshipById();
-                    break;
-                    case 3:
-                        ShowAllStopsNeededToResupply();
-                    break;
-                    case 4:
-                        ShowStopsNeededToResupplyById();
-                    break;
-                    default:
-                        Console.WriteLine($"{Environment.NewLine}Invalid value chosen.");
-                    break;
+                    // We could log and do other actions to business and infrastructure errors...
+                    Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}Sorry, something looks like wrong: {baseEx.Message}");
                 }
-
-                Console.Write($"{Environment.NewLine}Press ESC to exit or any else key to continue...");
+                catch (Exception e)
+                {
+                    Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}Sorry, something looks like wrong: {e.InnerException?.Message ?? e.Message}");
+                }
+                finally
+                {
+                    Console.Write($"{Environment.NewLine}Press ESC to exit or any else key to continue...");
+                }
             }
             while (Console.ReadKey().Key != ConsoleKey.Escape);
 
@@ -70,6 +82,7 @@ namespace Kneat.SW.ConsoleApp
             Console.Write("Please wait. Loading Starships...");
 
             var command = new FindAllStarshipsCommand();
+            // Need use ".Result" instend of "async await" to lock console application
             var starships = _mediator.Send(command).Result;
 
             Console.Clear();
@@ -135,7 +148,7 @@ namespace Kneat.SW.ConsoleApp
                 var stops = starship.GetStopsNeededToResupply(distance);
                 var stopsDescription = stops > 0 ? stops.ToString() : "Cannot be calculated.";
                 Console.WriteLine($"Name: {starship.Name}");
-                Console.WriteLine($"Stops Needed: {stopsDescription}{Environment.NewLine}");
+                Console.WriteLine($"Stops Required: {stopsDescription}{Environment.NewLine}");
             }
         }
 
@@ -173,7 +186,7 @@ namespace Kneat.SW.ConsoleApp
 
                 Console.WriteLine($"..:: Starship ::..{Environment.NewLine}");
                 Console.WriteLine($"Name: {starship.Name}");
-                Console.WriteLine($"Stops Needed: {stopsDescription}{Environment.NewLine}");
+                Console.WriteLine($"Stops Required: {stopsDescription}{Environment.NewLine}");
             }
             else
             {
@@ -181,10 +194,21 @@ namespace Kneat.SW.ConsoleApp
             }
         }
 
-        private static void LoadIocContainer()
+        private static void StartApplication()
         {
-            Console.WriteLine("Loading autofac context...");
-            _container = new ApplicationContextBuilder().Build();
+            try
+            {
+                Console.OutputEncoding = Encoding.Default;
+                Console.WriteLine("Starting Application...");
+                Console.WriteLine("Loading autofac context...");
+                _container = new ApplicationContextBuilder().Build();
+            }
+            catch
+            {
+                Console.Write($"{Environment.NewLine}Could not start application. Please, retry later. Press any key to exit...");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
         }
     }
 }

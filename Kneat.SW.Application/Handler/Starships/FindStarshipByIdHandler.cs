@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Kneat.SW.Application.Command.Starships;
 using Kneat.SW.Domain.Entity;
+using Kneat.SW.Domain.Exceptions;
 using Kneat.SW.Domain.Infrastructure.Gateways;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,8 +25,20 @@ namespace Kneat.SW.Application.Handler.Starships
         {
             return Task.Run<Starship>(() =>
             {
-                var apiModel = _swApiGateway.FindStarshipById(request.Id);
-                return _mapper.Map<Starship>(apiModel);
+                try
+                {
+                    var apiModel = _swApiGateway.FindStarshipById(request.Id);
+                    return _mapper.Map<Starship>(apiModel);
+                }
+                catch (BaseException baseEx)
+                {
+                    // We could log and do other actions to business and infrastructure errors...
+                    throw baseEx;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             });
         }
     }
