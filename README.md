@@ -4,7 +4,11 @@
 ### Language and IDE Information
 
 * This project was built using Visual Studio 2017 and implemented in C#. The platform used was .NET Core with a .NET Core console application and some .NET Standard class libraries as achitecture description below.
-* I used a Command/Handler pattern to do application actions. This pattern was implemented using MediatR (https://www.nuget.org/packages/MediatR/). Moreover Dependency Injection was supplied with Autofac (https://www.nuget.org/packages/Autofac) 
+
+### Application Architecture
+
+* Command/Handler pattern was used to do application actions. This pattern was implemented using MediatR (https://www.nuget.org/packages/MediatR/). 
+* Dependency Injection was supplied with Autofac (https://www.nuget.org/packages/Autofac).
 * Architectural design was based in Hexagonal Pattern (https://reflectoring.io/spring-hexagonal/) with the Application Layer accessing Infrastructure components.
 
 ### Application Structure
